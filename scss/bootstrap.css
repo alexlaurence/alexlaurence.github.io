@@ -1,7 +1,7 @@
 /*
 Error: Invalid CSS after "...lor}: #{$value}": expected "{", was ";"
-        on line 4 of /Users/chetri/Documents/personify-alex/scss/_root.scss
-        from line 12 of /Users/chetri/Documents/personify-alex/scss/bootstrap.scss
+        on line 4 of /Users/chetri/Documents/AlexCV_Site/scss/_root.scss
+        from line 12 of /Users/chetri/Documents/AlexCV_Site/scss/bootstrap.scss
 
 1: :root {
 2:   // Custom variable values only support SassScript inside `#{}`.
@@ -14,8 +14,8 @@ Error: Invalid CSS after "...lor}: #{$value}": expected "{", was ";"
 9:   }
 
 Backtrace:
-/Users/chetri/Documents/personify-alex/scss/_root.scss:4
-/Users/chetri/Documents/personify-alex/scss/bootstrap.scss:12
+/Users/chetri/Documents/AlexCV_Site/scss/_root.scss:4
+/Users/chetri/Documents/AlexCV_Site/scss/bootstrap.scss:12
 /Applications/Adobe Dreamweaver CC 2018/Adobe Dreamweaver CC 2018.app/Contents/Resources/gems/rubygems/gems/sass-3.4.24/lib/sass/scss/parser.rb:1207:in `expected'
 /Applications/Adobe Dreamweaver CC 2018/Adobe Dreamweaver CC 2018.app/Contents/Resources/gems/rubygems/gems/sass-3.4.24/lib/sass/scss/parser.rb:1137:in `expected'
 /Applications/Adobe Dreamweaver CC 2018/Adobe Dreamweaver CC 2018.app/Contents/Resources/gems/rubygems/gems/sass-3.4.24/lib/sass/scss/parser.rb:1132:in `tok!'
@@ -73,4 +73,4 @@ Backtrace:
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: Invalid CSS after \"...lor}: #{$value}\": expected \"{\", was \";\"\A         on line 4 of /Users/chetri/Documents/personify-alex/scss/_root.scss\A         from line 12 of /Users/chetri/Documents/personify-alex/scss/bootstrap.scss\A \A 1: :root {\A 2:   // Custom variable values only support SassScript inside `#{}`.\A 3:   @each $color, $value in $colors {\A 4:     --#{$color}: #{$value};\A 5:   }\A 6: \A 7:   @each $color, $value in $theme-colors {\A 8:     --#{$color}: #{$value};\A 9:   }"; }
+  content: "Error: Invalid CSS after \"...lor}: #{$value}\": expected \"{\", was \";\"\A         on line 4 of /Users/chetri/Documents/AlexCV_Site/scss/_root.scss\A         from line 12 of /Users/chetri/Documents/AlexCV_Site/scss/bootstrap.scss\A \A 1: :root {\A 2:   // Custom variable values only support SassScript inside `#{}`.\A 3:   @each $color, $value in $colors {\A 4:     --#{$color}: #{$value};\A 5:   }\A 6: \A 7:   @each $color, $value in $theme-colors {\A 8:     --#{$color}: #{$value};\A 9:   }"; }
