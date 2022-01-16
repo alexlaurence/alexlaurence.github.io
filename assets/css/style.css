@@ -15,6 +15,11 @@ body {
     margin: 0;
 }
 
+iframe {
+    display: block;
+    border-style:none;
+}
+
 article,
 aside,
 details,
