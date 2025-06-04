@@ -1226,6 +1226,8 @@ $(function() {
                         crtFormMessage.after('<span class="error-message">Message cannot be empty.</span>');
 		}
 								
+
+
                 if(crtFormErrocrt) {
                         // if has errors - do nothing
                         return false;
