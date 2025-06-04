@@ -1,6 +1,18 @@
 <?php
 
-	$emailTo = "a.laurence@celestial.tokyo"; // Enter your email for feedbacks here 
+// Return JSON responses
+header('Content-Type: application/json');
+
+        // The destination email is provided via environment variable so that it
+        // is not exposed in the repository.  Set CONTACT_EMAIL in the hosting
+        // environment to the address that should receive contact form
+        // submissions.
+        $emailTo = getenv('CONTACT_EMAIL');
+        if (!$emailTo) {
+                // Abort if the variable is not configured.
+                echo json_encode(false);
+                return;
+        }
 	
 	$headers = "MIME-Version: 1.0\r\n";
 	$headers .= "Content-type: text/html; charset=utf-8\r\n";

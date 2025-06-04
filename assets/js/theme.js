@@ -1184,12 +1184,13 @@ $(function() {
     };
 	
 	/** Contact Form */
-	$('.crtFormSubmit').on('click', function (e) {
-		
-		var crtForm = $(this).closest('.contact-form');
-		var crtFormErrocrt = false;
-		var crtFormAction = crtForm.attr('action');	
-		var crtFormFields = crtForm.find('.form-group');		           	
+        $('.crtFormSubmit').on('click', function (e) {
+                e.preventDefault();
+
+                var crtForm = $(this).closest('.contact-form');
+                var crtFormErrocrt = false;
+                var crtFormAction = crtForm.attr('action');
+                var crtFormFields = crtForm.find('.form-group');
 		var crtFormName = crtForm.find("[name='crtName']");						
 		var crtFormEmail = crtForm.find("[name='crtEmail']");
 		var crtFormMessage = crtForm.find("[name='crtMessage']");			
@@ -1199,43 +1200,51 @@ $(function() {
 		// Reset form errocrt
 		crtFormFields.removeClass('error');
 		crtFormErrocrt = false;
+                crtForm.find('.error-message').remove();
 
 		// Validate form fields	
 		if(!crtFormName.val()) {
 			crtFormErrocrt = true;
 			crtFormName.parent().addClass('error');
+                        crtFormName.after('<span class="error-message">Please enter your name.</span>');
 		}
 		if(!crtFormPrivacy.prop('checked')) {
 			crtFormErrocrt = true;
 			crtFormPrivacy.parent().addClass('error');
+                        crtFormPrivacy.parent().append('<span class="error-message">Please accept the privacy policy.</span>');
 		}
 		
 		if(!crtFormEmail.val() || !isValidEmail(crtFormEmail.val())) {
 			crtFormErrocrt = true;
 			crtFormEmail.parent().addClass('error');
+                        crtFormEmail.after('<span class="error-message">Please enter a valid email.</span>');
 		}
 		
 		if(!crtFormMessage.val()) {
 			crtFormErrocrt = true;
 			crtFormMessage.parent().addClass('error');
+                        crtFormMessage.after('<span class="error-message">Message cannot be empty.</span>');
 		}
 								
-		if(crtFormErrocrt) {
-			// if has errocrt - do nothing
-			return false;
-		} else {	
-			$.post( crtFormAction,
-					crtForm.serialize(),
-					function (response) {
-						var data = jQuery.parseJSON( response );
-						if(data){								
-							crtForm.append('<div class="crtFormResponce"><strong>Congratulation!</strong><br>Your email was sent successfully!</div>');
-						} else {
-							crtForm.append('<div class="crtFormResponce"><strong>OOPS!</strong> Something went wrong.<br>Please try again.</div>');
-						}							
-					}
-				);
-			return false;
-		}					                         
+                if(crtFormErrocrt) {
+                        // if has errors - do nothing
+                        return false;
+                } else {
+                        $.ajax({
+                                url: crtFormAction,
+                                method: 'POST',
+                                data: crtForm.serialize()
+                        }).done(function (response) {
+                                var data = jQuery.parseJSON( response );
+                                if(data){
+                                        window.location.href = 'message-sent.html';
+                                } else {
+                                        crtForm.append('<div class="crtFormResponce"><strong>OOPS!</strong> Something went wrong.<br>Please try again.</div>');
+                                }
+                        }).fail(function () {
+                                crtForm.append('<div class="crtFormResponce"><strong>OOPS!</strong> Unable to submit form.<br>Please try again later.</div>');
+                        });
+                        return false;
+                }
 	});
 })
