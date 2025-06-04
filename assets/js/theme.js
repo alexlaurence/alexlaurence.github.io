@@ -1184,12 +1184,13 @@ $(function() {
     };
 	
 	/** Contact Form */
-	$('.crtFormSubmit').on('click', function (e) {
-		
-		var crtForm = $(this).closest('.contact-form');
-		var crtFormErrocrt = false;
-		var crtFormAction = crtForm.attr('action');	
-		var crtFormFields = crtForm.find('.form-group');		           	
+        $('.crtFormSubmit').on('click', function (e) {
+                e.preventDefault();
+
+                var crtForm = $(this).closest('.contact-form');
+                var crtFormErrocrt = false;
+                var crtFormAction = crtForm.attr('action');
+                var crtFormFields = crtForm.find('.form-group');
 		var crtFormName = crtForm.find("[name='crtName']");						
 		var crtFormEmail = crtForm.find("[name='crtEmail']");
 		var crtFormMessage = crtForm.find("[name='crtMessage']");			
@@ -1225,23 +1226,27 @@ $(function() {
                         crtFormMessage.after('<span class="error-message">Message cannot be empty.</span>');
 		}
 								
-		if(crtFormErrocrt) {
-			// if has errocrt - do nothing
-			return false;
-		} else {	
-			$.post( crtFormAction,
-					crtForm.serialize(),
-					function (response) {
-						var data = jQuery.parseJSON( response );
-						if(data){								
-                                                        window.location.href = 'message-sent.html';
-						}							
-                                                else {
-                                                        crtForm.append('<div class="crtFormResponce"><strong>OOPS!</strong> Something went wrong.<br>Please try again.</div>');
-                                                }
-					}
-				);
-			return false;
-		}					                         
+
+
+                if(crtFormErrocrt) {
+                        // if has errors - do nothing
+                        return false;
+                } else {
+                        $.ajax({
+                                url: crtFormAction,
+                                method: 'POST',
+                                data: crtForm.serialize()
+                        }).done(function (response) {
+                                var data = jQuery.parseJSON( response );
+                                if(data){
+                                        window.location.href = 'message-sent.html';
+                                } else {
+                                        crtForm.append('<div class="crtFormResponce"><strong>OOPS!</strong> Something went wrong.<br>Please try again.</div>');
+                                }
+                        }).fail(function () {
+                                crtForm.append('<div class="crtFormResponce"><strong>OOPS!</strong> Unable to submit form.<br>Please try again later.</div>');
+                        });
+                        return false;
+                }
 	});
 })
